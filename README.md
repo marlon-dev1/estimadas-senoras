@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Estimadas Señoras
 
-## Getting Started
+Landing page en español para un espacio de cine, conversación y comunidad con enfoque de género. Construida sobre el proyecto existente con Next.js 16, React 19, TypeScript y Tailwind CSS 4.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [localhost:3000](http://localhost:3000). Para comprobar la versión de producción:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Atomic Design
 
-## Learn More
+```text
+components/
+  atoms/       Iconos, flor, marca y enlaces de botón
+  molecules/   Navegación, títulos de sección y tarjetas de recursos
+  organisms/   Cabecera, portada, manifiesto, nosotras, cineforo, galería y pie
+  templates/   Composición de la landing
+app/page.tsx   Instancia de la plantilla en la ruta principal
+content/       Navegación, metadatos de recursos y enlaces externos
+```
 
-To learn more about Next.js, take a look at the following resources:
+Las secciones estáticas son Server Components. La navegación móvil y la galería con filtros y visor usan Client Components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Paleta reutilizable
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Los colores se registran en `app/globals.css` mediante `@theme`, la configuración CSS de Tailwind 4. No es necesario un archivo `tailwind.config.js`.
 
-## Deploy on Vercel
+| Token          | Color     | Ejemplos de utilidades                                        |
+| -------------- | --------- | ------------------------------------------------------------- |
+| `cherry-rose`  | `#B5185F` | `bg-cherry-rose`, `text-cherry-rose`, `border-cherry-rose`    |
+| `light-yellow` | `#FEFFE0` | `bg-light-yellow`, `text-light-yellow`, `border-light-yellow` |
+| `lime-cream`   | `#D0E86E` | `bg-lime-cream`, `text-lime-cream`, `border-lime-cream`       |
+| `strong-cyan`  | `#35C1C2` | `bg-strong-cyan`, `text-strong-cyan`, `border-strong-cyan`    |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+También se incluyen los tonos de apoyo `ink`, `paper`, `muted` y `line`. `paper` reutiliza `light-yellow` y `ink` es el verde oscuro de apoyo. Los colores admiten modificadores de opacidad, por ejemplo `bg-cherry-rose/15`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contenido e imágenes
+
+Los textos de presentación son ejemplos y se editan en los organismos de cada sección. Los enlaces de navegación están en `content/landing.ts`; los metadatos, descripciones y fuentes de las imágenes se encuentran en `content/forum-resources.ts`. Los botones de comunidad enlazan al perfil público de una de las autoras de la referencia.
+
+La web usa los carteles originales de la carpeta de Drive y las tres páginas del PDF del cineforo proporcionados por el usuario. El [inventario de recursos](docs/forum-assets.md) documenta sus fuentes y usos. Las imágenes están optimizadas en `public/images/foro/` y el PDF original se conserva en `public/pdf/`.
+
+El [análisis de la referencia inicial](docs/design-reference.md) recoge la publicación de Instagram y las decisiones visuales de la primera versión.
+
+Incluye diseño adaptable, navegación móvil, filtros para carteles y guías, visor con flechas y cierre mediante Escape, enlaces a los originales, lectura y descarga del PDF, enlace para saltar al contenido y respeto por la preferencia de movimiento reducido.
